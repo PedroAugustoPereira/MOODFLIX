@@ -20,7 +20,7 @@ export interface UserInstance
     User {}
 
 export const User = sequelize.define<UserInstance, User>(
-  "users",
+  "Users",
   {
     id: {
       allowNull: false,
