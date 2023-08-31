@@ -18,7 +18,7 @@ export interface EpisodeInstance
   extends Model<Episode, EpisodeCreateAttributes>,
     Episode {}
 
-export const Episode = sequelize.define<EpisodeInstance, Episode>("episodes", {
+export const Episode = sequelize.define<EpisodeInstance, Episode>("Episodes", {
   id: {
     allowNull: false,
     autoIncrement: true,
