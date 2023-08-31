@@ -1,15 +1,18 @@
-import { ResourceOptions } from "adminjs";
+import uploadFileFeature from "@adminjs/upload";
+import { FeatureType, ResourceOptions } from "adminjs";
+import path from "path";
 
 export const courseResourceOptions: ResourceOptions = {
   navigation: "Catalogo",
   editProperties: [
     "name",
     "synopsis",
-    "thumbnailUrl",
+    "uploadThumbnail",
     "featured",
     "categoryId",
   ],
   filterProperties: [
+    "id",
     "name",
     "synopsis",
     "featured",
@@ -19,6 +22,7 @@ export const courseResourceOptions: ResourceOptions = {
   ],
   listProperties: ["id", "name", "featured", "categoryId"],
   showProperties: [
+    "id",
     "name",
     "synopsis",
     "featured",
@@ -28,3 +32,21 @@ export const courseResourceOptions: ResourceOptions = {
     "updatedAt",
   ],
 };
+
+export const courseResourceFeatures: FeatureType[] = [
+  uploadFileFeature({
+    provider: {
+      local: {
+        bucket: path.join(__dirname, "..", "..", "..", "public"),
+      },
+    },
+    properties: {
+      key: "thumbnailUrl",
+      file: "uploadThumbnail",
+    },
+
+    uploadPath: (record, filename) => {
+      return `thumbnails/course-${record.get("id")}/${filename}`;
+    },
+  }),
+];
