@@ -5,6 +5,7 @@ import { sequelize } from "../database";
 import { adminJsResources } from "./resources";
 import { User } from "../models";
 import bcrypt from "bcrypt";
+import { locale } from "./locale";
 
 AdminJS.registerAdapter(AdminJSSequelize); //configura nosso ORM
 
@@ -33,6 +34,8 @@ export const adminJs = new AdminJS({
       },
     },
   },
+
+  locale: locale,
 });
 
 export const adminJsRouter = AdminJSExpress.buildAuthenticatedRouter(
