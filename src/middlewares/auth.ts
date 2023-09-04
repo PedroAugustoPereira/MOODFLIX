@@ -22,18 +22,46 @@ export function ensureAuth(
     }
 
     const token = authorizationHeader.replace(/Bearer /, "");
-    console.log(token);
 
-    jwtService.verifyToken(token, (err, decoded) => {
-        console.log(decoded);
-
+    jwtService.verifyToken(token, async (err, decoded) => {
         if (err || typeof decoded === "string") {
             return res.status(401).json({ message: "User is not authorized" });
         }
 
-        userService.findByEmail((decoded as JwtPayload).email).then((user) => {
-            req.user = user;
-            next();
-        });
+        const user = await userService.findByEmail(
+            (decoded as JwtPayload).email,
+        );
+        req.user = user;
+        next();
+    });
+}
+
+export function ensureAuthViaQuery(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction,
+) {
+    const { token } = req.query;
+
+    if (!token) {
+        return res.status(400).json({ messsage: "O token não foi fernecido" });
+    }
+
+    if (typeof token !== "string") {
+        return res
+            .status(40)
+            .json({ messsage: "O tipo do token não está correto" });
+    }
+
+    jwtService.verifyToken(token, async (err, decoded) => {
+        if (err || typeof decoded === "string") {
+            return res.status(401).json({ message: "User is not authorized" });
+        }
+
+        const user = await userService.findByEmail(
+            (decoded as JwtPayload).email,
+        );
+        req.user = user;
+        next();
     });
 }
