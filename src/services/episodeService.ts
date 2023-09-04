@@ -8,31 +8,31 @@ export const episodeService = {
         videoUrl: string,
         range: string | undefined,
     ) => {
-        const filePath = path.join(__dirname, "..", "../uploads", videoUrl);
-        const fileStat = fs.statSync(filePath);
+        const filePath = path.join(__dirname, "..", "../uploads", videoUrl); //Obtém o arquivo
+        const fileStat = fs.statSync(filePath); //Obtém dados do arquivo
 
         if (range) {
-            const parts = range.replace(/bytes=/, "").split("-");
-            const start = parseInt(parts[0], 10);
-            const end = parts[1] ? parseInt(parts[1], 10) : fileStat.size - 1;
+            const parts = range.replace(/bytes=/, "").split("-"); // removendo a string bytes e separando os dados de range em um array
+            const start = parseInt(parts[0], 10); //pegando o primeiro indice do array, que é  onde o video incia
+            const end = parts[1] ? parseInt(parts[1], 10) : fileStat.size - 1; // pegando o final, se houver
 
-            const chunkSize = end - start - 1;
+            const chunkSize = end - start - 1; // pegando o tamanho que vamos transimitir para o front-end
 
             const file = fs.createReadStream(filePath, {
                 start,
                 end,
-            });
+            }); // criando um fluxo de leitura do arquivo, especificando onde começa e onde termina
 
             const head = {
-                "Content-range": `bytes ${start}-${end}/${fileStat.size}`,
-                "Accept-Ranges": "bytes",
-                "Content-Length": chunkSize,
-                "Content-Type": "video/mp4",
+                "Content-range": `bytes ${start}-${end}/${fileStat.size}`, //especificamos os bytes de resposa
+                "Accept-Ranges": "bytes", //dizemos que o range será em bytes
+                "Content-Length": chunkSize, //definimos o tamanho
+                "Content-Type": "video/mp4", //tipo de arquivo de resposta
             };
 
-            res.writeHead(206, head);
+            res.writeHead(206, head); //escrevemos na saída com status de 2006
 
-            file.pipe(res);
+            file.pipe(res); //passamos essa instancia de arquivo delimitado para uma resposta no res, o pipe vai ler o arquivo e escrever na resposta com o portocolo HTTP
         } else {
             const head = {
                 "Content-Length": fileStat.size,

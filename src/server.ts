@@ -10,16 +10,16 @@ const app = express();
 //it's wich set a path for the new route
 app.use(adminJs.options.rootPath, adminJsRouter);
 app.use(express.static("public"));
-app.use(router);
 app.use(express.json());
+app.use(router);
 
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-  console.log(__dirname);
-  console.log(`Served started successfully at port ${PORT}`);
+    console.log(__dirname);
+    console.log(`Served started successfully at port ${PORT}`);
 
-  sequelize.authenticate().then(() => {
-    console.log("db connection has been sucess");
-  });
+    sequelize.authenticate().then(() => {
+        console.log("db connection has been sucess");
+    });
 });
