@@ -41,10 +41,10 @@ export const favoritesController = {
     //DELETE /favorite/:id
     delete: async (req: AuthenticatedRequest, res: Response) => {
         const userId = req.user!.id;
-        const { courseId } = req.body;
+        const courseId = req.params.id;
 
         try {
-            await favoriteService.delete(userId, courseId);
+            await favoriteService.delete(userId, Number(courseId));
             res.status(204).send();
         } catch (err) {
             if (err instanceof Error) {
