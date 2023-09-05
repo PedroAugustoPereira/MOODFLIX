@@ -9,8 +9,8 @@ export interface Favorite {
 }
 
 export interface FavoriteInstance extends Model<Favorite> {
-    course?: CourceInstance;
-    user?: UserInstance;
+    Course?: CourceInstance;
+    User?: UserInstance;
 }
 
 export const Favorite = sequelize.define<FavoriteInstance, Favorite>(

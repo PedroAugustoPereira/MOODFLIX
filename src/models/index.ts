@@ -13,7 +13,7 @@ Course.hasMany(Favorite, { as: "FavoritesUsers", foreignKey: "course_id" }); //u
 
 Episode.belongsTo(Course);
 
-Favorite.belongsTo(Course); // um registro na tabela Favorite, pertence a um curso
+Favorite.belongsTo(Course, { as: "Course" }); // um registro na tabela Favorite, pertence a um curso
 Favorite.belongsTo(User); // um registro na tabela favorite, pertence a um usuario
 
 User.belongsToMany(Course, { through: Favorite }); //relação de muitos para muitos com os cursos, de caordo com Favorite
