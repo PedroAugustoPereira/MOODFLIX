@@ -14,7 +14,7 @@ Course.belongsToMany(User, { through: Like });
 Course.hasMany(Episode, { as: "episodes" });
 Course.hasMany(Favorite, { as: "FavoritesUsers", foreignKey: "course_id" }); //um curso pode ter varios registro na tebela favorite, para ussuarios diferentes
 
-Episode.belongsTo(Course);
+Episode.belongsTo(Course, { as: "Course" });
 Episode.belongsToMany(User, { through: WatchTime });
 
 Favorite.belongsTo(Course, { as: "Course" }); // um registro na tabela Favorite, pertence a um curso

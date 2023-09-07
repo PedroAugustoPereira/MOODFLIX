@@ -7,12 +7,7 @@ export const favoriteService = {
             where: { userId },
             include: {
                 association: "Course",
-                attributes: [
-                    "id",
-                    "name",
-                    "synopsis",
-                    ["thumbnail_url", "thumbnailUrl"],
-                ],
+                attributes: ["id", "name", "synopsis", ["thumbnail_url", "thumbnailUrl"]],
             },
         });
 
