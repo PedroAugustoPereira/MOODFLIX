@@ -31,6 +31,18 @@ export const coursesController = {
         }
     },
 
+    //GET /courses/popular
+    popular: async (req: Request, res: Response) => {
+        try {
+            const topTen = await courseService.getTopTenByLikes();
+            return res.json(topTen);
+        } catch (err) {
+            if (err instanceof Error) {
+                return res.status(400).json({ message: err.message });
+            }
+        }
+    },
+
     //GET /courses/search?name=
     search: async (req: Request, res: Response) => {
         const { name } = req.query;
@@ -62,9 +74,12 @@ export const coursesController = {
                 return res.status(404).json({ message: "Course not found" });
             }
 
-            const favorited = await favoriteService.isFavorited(userId, Number(courseId));
+            const favorited = await favoriteService.isFavorited(
+                userId,
+                Number(courseId),
+            );
             const liked = await likeService.isLiked(userId, Number(courseId));
-            return res.status(200).json({ ...course.get(), liked , favorited});
+            return res.status(200).json({ ...course.get(), liked, favorited });
         } catch (err) {
             if (err instanceof Error) {
                 return res.status(400).json({ message: err.message });
