@@ -3,6 +3,19 @@ import { Response } from "express";
 import { userService } from "../services/userService";
 
 export const usersController = {
+    //GET /users/current
+    show: async (req: AuthenticatedRequest, res: Response) => {
+        const currentUser = req.user!;
+
+        try {
+            return res.json(currentUser);
+        } catch (err) {
+            if (err instanceof Error) {
+                return res.status(400).json({ message: err.message });
+            }
+        }
+    },
+
     //GET /users/current/wathing
 
     wathing: async (req: AuthenticatedRequest, res: Response) => {
