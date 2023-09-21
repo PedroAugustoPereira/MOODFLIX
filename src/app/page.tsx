@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Head from "next/head";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import Link from "next/link";
 import HeaderNoAuth from "@/components/homeNoAuth/header";
+import PresentationSection from "@/components/homeNoAuth/presentationSection";
+import CardSection from "@/components/homeNoAuth/cardSection";
 
 export const metadata = {
   title: "Moodflix",
@@ -25,7 +27,12 @@ const HomeNoAuth = () => {
   return (
     <>
       <main>
-        <HeaderNoAuth />
+        <div className={styles.sectionBackground}>
+          <HeaderNoAuth />
+          <PresentationSection />
+        </div>
+
+        <CardSection />
       </main>
     </>
   );
