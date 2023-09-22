@@ -5,6 +5,9 @@ import Link from "next/link";
 import HeaderNoAuth from "@/components/homeNoAuth/header";
 import PresentationSection from "@/components/homeNoAuth/presentationSection";
 import CardSection from "@/components/homeNoAuth/cardSection";
+import SlideSection from "@/components/homeNoAuth/slideSection";
+import courseService, { CourseType } from "@/services/courseService";
+import { ReactNode } from "react";
 
 export const metadata = {
   title: "Moodflix",
@@ -23,7 +26,14 @@ export const metadata = {
     "Tenha acesso aos melhores conteúdos de programação de maneira simples e fácil",
 };
 
-const HomeNoAuth = () => {
+interface IndexPageProps {
+  children?: ReactNode;
+  course: CourseType[];
+}
+
+const HomeNoAuth = async () => {
+  const course = await fetchData();
+
   return (
     <>
       <main>
@@ -33,9 +43,15 @@ const HomeNoAuth = () => {
         </div>
 
         <CardSection />
+        <SlideSection newestCourses={course} />
       </main>
     </>
   );
+};
+
+const fetchData = async () => {
+  const res = await courseService.getNewestCourse();
+  return res.data;
 };
 
 export default HomeNoAuth;
