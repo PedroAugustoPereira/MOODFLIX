@@ -8,6 +8,7 @@ import CardSection from "@/components/homeNoAuth/cardSection";
 import SlideSection from "@/components/homeNoAuth/slideSection";
 import courseService, { CourseType } from "@/services/courseService";
 import { ReactNode } from "react";
+import Footer from "@/components/common/footer";
 
 export const metadata = {
   title: "Moodflix",
@@ -44,6 +45,7 @@ const HomeNoAuth = async () => {
 
         <CardSection />
         <SlideSection newestCourses={course} />
+        <Footer />
       </main>
     </>
   );
