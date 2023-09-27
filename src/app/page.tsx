@@ -38,13 +38,23 @@ const HomeNoAuth = async () => {
   return (
     <>
       <main>
-        <div className={styles.sectionBackground}>
+        <div
+          className={styles.sectionBackground}
+          data-aos="fade-zoom-in"
+          data-aos-duration="1600"
+        >
           <HeaderNoAuth />
           <PresentationSection />
         </div>
 
-        <CardSection />
-        <SlideSection newestCourses={course} />
+        <div data-aos="fade-right" data-aos-duration="1200">
+          <CardSection />
+        </div>
+
+        <div data-aos="fade-up" data-aos-duration="1350">
+          <SlideSection newestCourses={course} />
+        </div>
+
         <Footer />
       </main>
     </>

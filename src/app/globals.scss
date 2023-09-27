@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  overflow: hidden;
+}
+
 main {
   background-color: #151515;
   min-height: 100vh;
