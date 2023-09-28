@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AosComponent from "@/components/common/aos";
+import Jsuits from "@/components/common/jsuits";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <Jsuits />
+      </head>
       <AosComponent />
       <body className={inter.className}>{children}</body>
     </html>
