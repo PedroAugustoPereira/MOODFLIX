@@ -213,7 +213,6 @@ const Register = () => {
         color="bg-danger"
         isOpen={toastIsOpen}
         message={toastMessage}
-        aos={aosData}
       />
     </>
   );

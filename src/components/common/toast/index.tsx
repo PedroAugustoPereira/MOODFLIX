@@ -6,10 +6,9 @@ interface props {
   isOpen: boolean;
   message: string;
   color: string;
-  aos: boolean;
 }
 
-const ToastComponent = ({ isOpen, message, color, aos }: props) => {
+const ToastComponent = ({ isOpen, message, color }: props) => {
   return (
     <>
       <Toast
