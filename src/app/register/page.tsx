@@ -1,4 +1,4 @@
-import styles from "../../../styles/registerLogin.module.scss";
+import styles from "@/styles/registerLogin.module.scss";
 import Head from "next/head";
 import HeaderGeneric from "./../../components/common/headerGeneric/";
 import Footer from "@/components/common/footer";

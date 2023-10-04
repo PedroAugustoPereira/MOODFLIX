@@ -1,9 +1,7 @@
-
-
 import Footer from "@/components/common/footer";
-import styles from "../../../styles/registerLogin.module.scss";
+import styles from "@/styles/registerLogin.module.scss";
 import HeaderGeneric from "./../../components/common/headerGeneric/";
-import FormLogin from "@/components/auth/register/login/form";
+import FormLogin from "@/components/auth/login/form";
 
 import Head from "next/head";
 

@@ -44,6 +44,58 @@ const courseService = {
 
     return res;
   },
+
+  addToFav: async (courseId: number) => {
+    const token = sessionStorage.getItem("moodflix-token");
+
+    const res = await api
+      .post(
+        "/favorites",
+        { courseId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .catch((err) => {
+        return err.response;
+      });
+    return res;
+  },
+
+  removeFav: async (courseId: number | string) => {
+    const token = sessionStorage.getItem("moodflix-token");
+
+    const res = await api
+      .delete("/favorites", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: { courseId: courseId },
+      })
+      .catch((err) => {
+        return err.response;
+      });
+
+    return res;
+  },
+
+  getFavCourse: async () => {
+    const token = sessionStorage.getItem("moodflix-token");
+
+    const res = await api
+      .get("/favorites", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((err) => {
+        return err.response;
+      });
+
+    return res;
+  },
 };
 
 export default courseService;

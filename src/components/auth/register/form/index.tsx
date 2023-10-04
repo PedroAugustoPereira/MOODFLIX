@@ -5,7 +5,7 @@ import authService from "@/services/authService";
 import { useRouter } from "next/navigation";
 import ToastComponent from "@/components/common/toast";
 import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
-import styles from "../../../../../styles/registerLogin.module.scss";
+import styles from "@/styles/registerLogin.module.scss";
 
 export default function FormRegister() {
   const router = useRouter();

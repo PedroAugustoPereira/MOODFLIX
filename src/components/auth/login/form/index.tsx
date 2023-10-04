@@ -5,7 +5,7 @@ import { useState, useEffect, FormEvent } from "react";
 import ToastComponent from "@/components/common/toast";
 import authService from "@/services/authService";
 import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
-import styles from "../../../../../../styles/registerLogin.module.scss";
+import styles from "@/styles/registerLogin.module.scss";
 
 export default function FormLogin() {
   const router = useRouter();
@@ -14,12 +14,11 @@ export default function FormLogin() {
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
-
   useEffect(() => {
-    if(sessionStorage.getItem("moodflix-token")){
+    if (sessionStorage.getItem("moodflix-token")) {
       router.push("/home");
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const registerSucess = params.get("registred");
