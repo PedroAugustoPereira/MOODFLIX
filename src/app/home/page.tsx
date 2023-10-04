@@ -1,3 +1,4 @@
+import NewestCategory from "@/components/homeAuth/newestCategory";
 import FeaturedSection from "./../../components/homeAuth/featuredSection/index";
 
 export const metadata = {
@@ -21,6 +22,7 @@ const HomeAuth = () => {
     <>
       <main>
         <FeaturedSection />
+        <NewestCategory />
       </main>
     </>
   );
