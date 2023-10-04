@@ -1,6 +1,7 @@
 import NewestCategory from "@/components/homeAuth/newestCategory";
 import FeaturedSection from "./../../components/homeAuth/featuredSection/index";
 import FavoriteCategory from "./../../components/homeAuth/favoriteCategory/index";
+import FeaturedCategory from "./../../components/homeAuth/featuredCategory/index";
 
 export const metadata = {
   title: "Moodflix - Home",
@@ -25,6 +26,7 @@ const HomeAuth = () => {
         <FeaturedSection />
         <NewestCategory />
         <FavoriteCategory />
+        <FeaturedCategory />
       </main>
     </>
   );
