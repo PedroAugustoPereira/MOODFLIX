@@ -1,4 +1,4 @@
-import HeaderAuth from "@/components/headerAuth";
+import FeaturedSection from "./../../components/homeAuth/featuredSection/index";
 
 export const metadata = {
   title: "Moodflix - Home",
@@ -20,7 +20,7 @@ const HomeAuth = () => {
   return (
     <>
       <main>
-        <HeaderAuth />
+        <FeaturedSection />
       </main>
     </>
   );
