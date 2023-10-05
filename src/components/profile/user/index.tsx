@@ -70,7 +70,12 @@ const UserForm = () => {
 
   return (
     <>
-      <Form className={styles.form} onSubmit={handleUserUpdate}>
+      <Form
+        data-aos="fade-down"
+        data-aos-duration="1350"
+        className={styles.form}
+        onSubmit={handleUserUpdate}
+      >
         <div className={styles.forName}>
           <p className={styles.nameAbbreviation}>
             {firstName.slice(0, 1)}
