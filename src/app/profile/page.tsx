@@ -22,7 +22,7 @@ export const metadata = {
 const UserInfo = () => {
   return (
     <>
-      <main>
+      <main className={styles.main}>
         <div className={styles.header}>
           <HeaderAuth />
         </div>
