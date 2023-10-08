@@ -1,0 +1,12 @@
+@import "../styles/colors.modules.scss";
+
+.noSearchResult {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 20px;
+}
+
+.searchResult {
+  flex: 1 0 auto;
+}

@@ -1,7 +1,8 @@
 import styles from "./styles.module.scss";
 import HeaderAuth from "../../components/headerAuth";
 import courseService, { CourseType } from "@/services/courseService";
-import SearchItens from "@/components/searchItens";
+import SearchItens from "@/components/search/searchItens";
+import Footer from "@/components/common/footer";
 
 export const metadata = {
   title: "Moodflix - ",
@@ -31,9 +32,16 @@ const Search = async ({ searchParams }: props) => {
 
   return (
     <>
-      <main>
-        <HeaderAuth />
+      <main className={styles.main}>
+        <div className={styles.bg}>
+          <HeaderAuth />
+        </div>
+
         <SearchItens name={searchName} />
+
+        <div className={styles.bg}>
+          <Footer />
+        </div>
       </main>
     </>
   );
