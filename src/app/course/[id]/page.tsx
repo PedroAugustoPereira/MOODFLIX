@@ -1,5 +1,4 @@
 import styles from "@/styles/coursePage.module.scss";
-import HeaderAuth from "@/components/headerAuth";
 import GetEpisodes from "./../../../components/courses/getEpisodes/index";
 
 export const metadata = {
@@ -30,7 +29,6 @@ const CoursePage = ({ params }: getParams) => {
   return (
     <>
       <main>
-        <HeaderAuth />
         <GetEpisodes id={params.id} />
       </main>
     </>

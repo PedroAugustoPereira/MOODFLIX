@@ -14,7 +14,7 @@ export type CourseType = {
   name: string;
   thumbnailUrl: string;
   synopsis: string;
-  espisodes?: EpisodeType[];
+  episodes?: EpisodeType[];
 };
 
 const courseService = {
@@ -45,7 +45,7 @@ const courseService = {
     return res;
   },
 
-  addToFav: async (courseId: number) => {
+  addToFav: async (courseId: number | string) => {
     const token = sessionStorage.getItem("moodflix-token");
 
     const res = await api
@@ -102,11 +102,10 @@ const courseService = {
     const token = sessionStorage.getItem("moodflix-token");
 
     const res = await api
-      .delete("/favorites", {
+      .delete(`/favorites/${courseId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        data: { courseId: courseId },
       })
       .catch((err) => {
         return err.response;

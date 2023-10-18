@@ -11,7 +11,7 @@ const SearchCard = ({ course }: props) => {
     <>
       <Link
         style={{ color: "white", textDecoration: "none" }}
-        href={`/courses/${course.id}`}
+        href={`/course/${course.id}`}
       >
         <div className={styles.searchCard}>
           <img
