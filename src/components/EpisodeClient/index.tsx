@@ -3,11 +3,13 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import HeaderGeneric from "../common/headerGeneric";
 import courseService, { CourseType } from "@/services/courseService";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SpinnerComponent from "../common/spinner";
 import { Button, Container } from "reactstrap";
 import styles from "@/styles/episodePlayer.module.scss";
 import ReactPlayer from "react-player";
+import Footer from "../common/footer";
+import watchEpisodeService from "@/services/episodeService";
 
 interface props {
   episodeOrder: number;
@@ -18,6 +20,44 @@ const EpisodeClient = ({ episodeOrder }: props) => {
   const router = useRouter();
   const courseId = query.get("courseid")?.toString();
   const [course, setCourse] = useState<CourseType>();
+  const [isReady, setIsReady] = useState(false);
+  const [getEpisodeTime, setGetEpisodeTime] = useState(0);
+  const [episodeTime, setEpisodeTime] = useState(0);
+  const episodeId = parseFloat(query.get("episodeid")?.toString() || "");
+  console.log(episodeId);
+
+  const playerRef = useRef<ReactPlayer>(null);
+
+  const handleGetEpisodeTime = async () => {
+    const res = await watchEpisodeService.getWatchTime(episodeId);
+    console.log(res);
+    if (res.data !== null) {
+      setGetEpisodeTime(res.data.seconds);
+    }
+  };
+
+  const handleSetEpisodeTime = async () => {
+    await watchEpisodeService.setWatchTime({
+      episodeId: episodeId,
+      seconds: Math.round(episodeTime),
+    });
+  };
+
+  useEffect(() => {
+    handleGetEpisodeTime();
+  }, [router]);
+
+  const handlePlayerTime = () => {
+    playerRef.current?.seekTo(getEpisodeTime);
+    setIsReady(true);
+  };
+
+  if (isReady) {
+    console.log("aqui");
+    setTimeout(() => {
+      handleSetEpisodeTime();
+    }, 1000 * 3);
+  }
 
   const getCourse = async () => {
     if (typeof courseId !== "string") {
@@ -31,12 +71,21 @@ const EpisodeClient = ({ episodeOrder }: props) => {
     }
   };
 
+  //&episodeid=${episodeId}
   const handleLastEpisode = () => {
-    router.push(`/course/episode/${episodeOrder - 1}?courseid=${course?.id}`);
+    router.push(
+      `/course/episode/${episodeOrder - 1}?courseid=${course?.id}&episodeid=${
+        episodeId - 1
+      }`
+    );
   };
 
   const handleNextEpisode = () => {
-    router.push(`/course/episode/${episodeOrder + 1}?courseid=${course?.id}`);
+    router.push(
+      `/course/episode/${episodeOrder + 1}?courseid=${course?.id}&episodeid=${
+        episodeId + 1
+      }`
+    );
   };
 
   useEffect(() => {
@@ -44,7 +93,6 @@ const EpisodeClient = ({ episodeOrder }: props) => {
   }, [courseId]);
 
   if (course?.episodes === undefined) return <SpinnerComponent />;
-  console.log(course);
 
   return (
     <>
@@ -65,6 +113,11 @@ const EpisodeClient = ({ episodeOrder }: props) => {
               course.episodes[episodeOrder].videoUrl
             }&token=${sessionStorage.getItem("moodflix-token")}`}
             controls
+            ref={playerRef}
+            onStart={handlePlayerTime}
+            onProgress={(progress) => {
+              setEpisodeTime(progress.playedSeconds);
+            }}
           />
         )}
         <div className={styles.episodeButtonDiv}>
@@ -97,6 +150,7 @@ const EpisodeClient = ({ episodeOrder }: props) => {
           {course.episodes[episodeOrder].synopsis}
         </p>
       </Container>
+      <Footer />
     </>
   );
 };
